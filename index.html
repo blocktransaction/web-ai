@@ -1,0 +1,969 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AI 网址导航 | 国际与国内 AI 工具目录</title>
+  <meta name="description" content="汇总国际和国内主流 AI 网站，按助手、搜索、编程、图像、视频、音频、办公和开发平台分类。" />
+  <style>:root {
+  --background: #f7f4ed;
+  --foreground: #18211f;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+.hero {
+  min-height: 92vh;
+  padding: 28px clamp(18px, 4vw, 56px) 52px;
+  background:
+    linear-gradient(135deg, rgba(28, 98, 98, 0.18), transparent 34%),
+    linear-gradient(315deg, rgba(220, 88, 70, 0.18), transparent 36%),
+    #f7f4ed;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(24, 33, 31, 0.12);
+}
+
+.topbar {
+  width: min(1180px, 100%);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 800;
+}
+
+.brand-mark {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  border-radius: 8px;
+  background: #18211f;
+  color: #f7f4ed;
+  font-size: 14px;
+  letter-spacing: 0;
+}
+
+.topbar-links {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(24, 33, 31, 0.72);
+  font-size: 14px;
+}
+
+.topbar-links a {
+  min-width: 56px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.topbar-links a:hover {
+  background: rgba(24, 33, 31, 0.08);
+  color: #18211f;
+}
+
+.hero-grid {
+  width: min(1180px, 100%);
+  margin: 70px auto 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 440px);
+  gap: clamp(28px, 6vw, 78px);
+  align-items: center;
+}
+
+.hero-copy {
+  max-width: 720px;
+}
+
+.eyebrow {
+  margin: 0 0 14px;
+  color: #1c6262;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin-top: 0;
+}
+
+h1 {
+  margin-bottom: 22px;
+  max-width: 760px;
+  font-size: clamp(44px, 8vw, 92px);
+  line-height: 0.98;
+  letter-spacing: 0;
+}
+
+.hero-text {
+  max-width: 680px;
+  color: rgba(24, 33, 31, 0.74);
+  font-size: clamp(16px, 2vw, 20px);
+  line-height: 1.75;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 34px;
+}
+
+.primary-action,
+.secondary-action {
+  display: inline-flex;
+  min-height: 46px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  padding: 0 18px;
+  font-weight: 800;
+}
+
+.primary-action {
+  background: #dc5846;
+  color: #fffaf1;
+}
+
+.secondary-action {
+  border: 1px solid rgba(24, 33, 31, 0.24);
+  color: #18211f;
+}
+
+.signal-panel {
+  border: 1px solid rgba(24, 33, 31, 0.15);
+  border-radius: 8px;
+  background: rgba(255, 250, 241, 0.72);
+  box-shadow: 0 28px 70px rgba(24, 33, 31, 0.12);
+  padding: 18px;
+  backdrop-filter: blur(18px);
+}
+
+.signal-header,
+.signal-stats {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.signal-header {
+  color: rgba(24, 33, 31, 0.68);
+  font-size: 13px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.signal-cells {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 8px;
+  margin: 18px 0;
+}
+
+.signal-cell {
+  aspect-ratio: 1;
+  border-radius: 6px;
+  background: #1c6262;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.3);
+}
+
+.signal-cell:nth-child(3n) {
+  background: #e0b13d;
+}
+
+.signal-cell:nth-child(5n) {
+  background: #dc5846;
+}
+
+.signal-cell.cell-china {
+  background: #7b4ab8;
+}
+
+.signal-cell.cell-china:nth-child(4n) {
+  background: #2f7d4e;
+}
+
+.signal-stats {
+  border-top: 1px solid rgba(24, 33, 31, 0.12);
+  padding-top: 16px;
+}
+
+.signal-stats div {
+  display: grid;
+  gap: 2px;
+}
+
+.signal-stats strong {
+  font-size: 28px;
+  line-height: 1;
+}
+
+.signal-stats span {
+  color: rgba(24, 33, 31, 0.6);
+  font-size: 12px;
+}
+
+.region-strip {
+  width: min(1180px, calc(100% - 36px));
+  margin: -36px auto 54px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  position: relative;
+  z-index: 1;
+}
+
+.region-strip a {
+  min-height: 150px;
+  border-radius: 8px;
+  padding: 22px;
+  background: #fffaf1;
+  border: 1px solid rgba(24, 33, 31, 0.14);
+  box-shadow: 0 18px 40px rgba(24, 33, 31, 0.08);
+  display: grid;
+  align-content: space-between;
+  transition: transform 160ms ease, box-shadow 160ms ease;
+}
+
+.region-strip a:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 22px 46px rgba(24, 33, 31, 0.12);
+}
+
+.region-strip span {
+  color: rgba(24, 33, 31, 0.68);
+  font-weight: 800;
+}
+
+.region-strip strong {
+  font-size: 46px;
+  line-height: 1;
+}
+
+.region-strip small {
+  color: rgba(24, 33, 31, 0.58);
+  line-height: 1.5;
+}
+
+.catalog,
+.intake,
+.notes {
+  width: min(1180px, calc(100% - 36px));
+  margin: 0 auto;
+}
+
+.section-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 18px;
+}
+
+.section-heading h2,
+.intake h2,
+.notes h2 {
+  margin: 0;
+  font-size: clamp(30px, 5vw, 54px);
+  line-height: 1.05;
+  letter-spacing: 0;
+}
+
+.section-heading > p {
+  color: rgba(24, 33, 31, 0.64);
+}
+
+.controls {
+  display: grid;
+  grid-template-columns: minmax(240px, 1fr) auto;
+  gap: 14px;
+  align-items: end;
+  margin-bottom: 14px;
+}
+
+.search-box {
+  display: grid;
+  gap: 8px;
+  color: rgba(24, 33, 31, 0.62);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.search-box input,
+.intake-form input,
+.intake-form select,
+.intake-form textarea {
+  width: 100%;
+  border: 1px solid rgba(24, 33, 31, 0.18);
+  border-radius: 8px;
+  background: #fffaf1;
+  color: #18211f;
+  outline: none;
+}
+
+.search-box input,
+.intake-form input,
+.intake-form select {
+  min-height: 52px;
+  padding: 0 16px;
+}
+
+.intake-form textarea {
+  min-height: 96px;
+  padding: 14px 16px;
+  resize: vertical;
+}
+
+.search-box input:focus,
+.intake-form input:focus,
+.intake-form select:focus,
+.intake-form textarea:focus {
+  border-color: #1c6262;
+  box-shadow: 0 0 0 4px rgba(28, 98, 98, 0.14);
+}
+
+.intake {
+  margin-bottom: 58px;
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: clamp(18px, 4vw, 48px);
+  align-items: start;
+}
+
+.intake-copy {
+  position: sticky;
+  top: 18px;
+}
+
+.intake-copy h2 {
+  margin-bottom: 16px;
+}
+
+.intake-copy > p {
+  color: rgba(24, 33, 31, 0.7);
+  line-height: 1.75;
+}
+
+.intake-status {
+  margin-top: 18px;
+  border-left: 4px solid #dc5846;
+  border-radius: 8px;
+  background: rgba(255, 250, 241, 0.86);
+  color: rgba(24, 33, 31, 0.74);
+  line-height: 1.6;
+  padding: 14px 16px;
+}
+
+.intake-form {
+  border: 1px solid rgba(24, 33, 31, 0.13);
+  border-radius: 8px;
+  background: #fffaf1;
+  box-shadow: 0 16px 36px rgba(24, 33, 31, 0.08);
+  display: grid;
+  gap: 14px;
+  padding: 18px;
+}
+
+.intake-form label {
+  display: grid;
+  gap: 8px;
+  color: rgba(24, 33, 31, 0.62);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.intake-form button {
+  min-height: 48px;
+  border: 0;
+  border-radius: 8px;
+  background: #dc5846;
+  color: #fffaf1;
+  cursor: pointer;
+  font-weight: 900;
+}
+
+.intake-form button:hover {
+  background: #c84d3d;
+}
+
+.segmented,
+.category-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.segmented {
+  border: 1px solid rgba(24, 33, 31, 0.14);
+  border-radius: 8px;
+  background: #fffaf1;
+  padding: 6px;
+}
+
+.segmented button,
+.category-row button {
+  min-height: 40px;
+  border: 0;
+  border-radius: 7px;
+  cursor: pointer;
+  color: rgba(24, 33, 31, 0.72);
+}
+
+.segmented button {
+  min-width: 68px;
+  background: transparent;
+  padding: 0 14px;
+}
+
+.category-row {
+  margin-bottom: 24px;
+}
+
+.category-row button {
+  background: rgba(255, 250, 241, 0.85);
+  border: 1px solid rgba(24, 33, 31, 0.12);
+  padding: 0 13px;
+}
+
+.segmented button.active,
+.category-row button.active {
+  background: #18211f;
+  color: #fffaf1;
+}
+
+.site-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.site-card {
+  min-height: 300px;
+  border: 1px solid rgba(24, 33, 31, 0.13);
+  border-radius: 8px;
+  background: #fffaf1;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  box-shadow: 0 12px 28px rgba(24, 33, 31, 0.06);
+}
+
+.card-topline,
+.tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.card-topline {
+  justify-content: space-between;
+  color: rgba(24, 33, 31, 0.56);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.badge-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+}
+
+.region-badge {
+  border-radius: 999px;
+  padding: 5px 8px;
+  color: #fffaf1;
+}
+
+.region-badge.international {
+  background: #1c6262;
+}
+
+.region-badge.china {
+  background: #7b4ab8;
+}
+
+.local-badge {
+  border-radius: 999px;
+  background: rgba(220, 88, 70, 0.14);
+  color: #9d362a;
+  padding: 5px 8px;
+}
+
+.card-title-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.site-initials {
+  display: grid;
+  width: 44px;
+  height: 44px;
+  flex: 0 0 auto;
+  place-items: center;
+  border-radius: 8px;
+  background: #f0dfba;
+  color: #18211f;
+  font-size: 13px;
+  font-weight: 900;
+  overflow: hidden;
+}
+
+.site-card h3 {
+  margin: 0;
+  font-size: 22px;
+  line-height: 1.15;
+  letter-spacing: 0;
+}
+
+.site-card p {
+  margin: 0;
+  color: rgba(24, 33, 31, 0.68);
+  line-height: 1.7;
+}
+
+.tag-row {
+  margin-top: auto;
+}
+
+.tag-row span {
+  border-radius: 999px;
+  background: rgba(28, 98, 98, 0.1);
+  color: #1c6262;
+  padding: 5px 8px;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.site-card > a {
+  display: inline-flex;
+  min-height: 42px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: #18211f;
+  color: #fffaf1;
+  font-weight: 800;
+}
+
+.empty-state {
+  border: 1px dashed rgba(24, 33, 31, 0.28);
+  border-radius: 8px;
+  background: rgba(255, 250, 241, 0.75);
+  padding: 28px;
+  color: rgba(24, 33, 31, 0.68);
+  text-align: center;
+}
+
+.notes {
+  margin-top: 70px;
+  margin-bottom: 46px;
+  border-top: 1px solid rgba(24, 33, 31, 0.14);
+  padding-top: 34px;
+  display: grid;
+  grid-template-columns: 0.7fr 1.3fr;
+  gap: 32px;
+}
+
+.note-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.note-grid p {
+  min-height: 120px;
+  margin: 0;
+  border-radius: 8px;
+  background: #fffaf1;
+  border: 1px solid rgba(24, 33, 31, 0.13);
+  color: rgba(24, 33, 31, 0.7);
+  line-height: 1.7;
+  padding: 18px;
+}
+
+@media (max-width: 920px) {
+  .hero {
+    min-height: auto;
+  }
+
+  .hero-grid,
+  .controls,
+  .intake,
+  .notes {
+    grid-template-columns: 1fr;
+  }
+
+  .intake-copy {
+    position: static;
+  }
+
+  .site-grid,
+  .note-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .controls {
+    align-items: stretch;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero {
+    padding: 20px 18px 54px;
+  }
+
+  .topbar,
+  .section-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .topbar-links {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .hero-grid {
+    margin-top: 48px;
+  }
+
+  h1 {
+    font-size: 44px;
+  }
+
+  .signal-cells {
+    grid-template-columns: repeat(6, 1fr);
+  }
+
+  .region-strip,
+  .form-row,
+  .site-grid,
+  .note-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .region-strip {
+    margin-top: -24px;
+  }
+
+  .site-card {
+    min-height: 280px;
+  }
+}</style>
+</head>
+<body>
+  <main class="min-h-screen bg-[#f7f4ed] text-[#18211f]">
+    <section class="hero">
+      <nav class="topbar" aria-label="站点导航">
+        <a href="#catalog" class="brand" aria-label="AI 网址导航首页">
+          <span class="brand-mark">AI</span>
+          <span>AI 网址导航</span>
+        </a>
+        <div class="topbar-links">
+          <a href="#international">国际</a>
+          <a href="#china">国内</a>
+          <a href="#submit">收录</a>
+          <a href="#catalog">目录</a>
+        </div>
+      </nav>
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">2026.07.21 更新</p>
+          <h1>全世界 AI 网址，一页分清国际和国内</h1>
+          <p class="hero-text">汇总当前主流 AI 助手、搜索、编程、图像、视频、音频、办公和开发平台。AI 产品变化很快，这里按“可用、知名、代表性”持续更新，而不是把失效链接也塞进来凑数。</p>
+          <div class="hero-actions">
+            <a href="#catalog" class="primary-action">浏览目录</a>
+            <a href="#submit" class="secondary-action">实时收录</a>
+          </div>
+        </div>
+        <div class="signal-panel" aria-label="目录概览">
+          <div class="signal-header"><span>AI map</span><span><strong id="total-sites">64</strong> sites</span></div>
+          <div class="signal-cells" aria-hidden="true" id="signal-cells">
+            <span class="signal-cell cell-international" title="ChatGPT"></span><span class="signal-cell cell-international" title="Claude"></span><span class="signal-cell cell-international" title="Gemini"></span><span class="signal-cell cell-international" title="Microsoft Copilot"></span><span class="signal-cell cell-international" title="Perplexity"></span><span class="signal-cell cell-international" title="Grok"></span><span class="signal-cell cell-international" title="Poe"></span><span class="signal-cell cell-international" title="You.com"></span><span class="signal-cell cell-international" title="Hugging Face"></span><span class="signal-cell cell-international" title="OpenAI Platform"></span><span class="signal-cell cell-international" title="Anthropic Console"></span><span class="signal-cell cell-international" title="Google AI Studio"></span><span class="signal-cell cell-international" title="Cursor"></span><span class="signal-cell cell-international" title="GitHub Copilot"></span><span class="signal-cell cell-international" title="Replit"></span><span class="signal-cell cell-international" title="Lovable"></span><span class="signal-cell cell-international" title="v0"></span><span class="signal-cell cell-international" title="Bolt"></span><span class="signal-cell cell-international" title="Midjourney"></span><span class="signal-cell cell-international" title="Adobe Firefly"></span><span class="signal-cell cell-international" title="Leonardo AI"></span><span class="signal-cell cell-international" title="Ideogram"></span><span class="signal-cell cell-international" title="Runway"></span><span class="signal-cell cell-international" title="Pika"></span><span class="signal-cell cell-international" title="Luma AI"></span><span class="signal-cell cell-international" title="Suno"></span><span class="signal-cell cell-international" title="Udio"></span><span class="signal-cell cell-international" title="ElevenLabs"></span><span class="signal-cell cell-international" title="Descript"></span><span class="signal-cell cell-international" title="Notion AI"></span><span class="signal-cell cell-international" title="Canva AI"></span><span class="signal-cell cell-international" title="Gamma"></span><span class="signal-cell cell-international" title="Zapier AI"></span><span class="signal-cell cell-china" title="DeepSeek"></span><span class="signal-cell cell-china" title="Kimi"></span><span class="signal-cell cell-china" title="豆包"></span><span class="signal-cell cell-china" title="通义千问"></span><span class="signal-cell cell-china" title="文心一言"></span><span class="signal-cell cell-china" title="智谱清言"></span><span class="signal-cell cell-china" title="讯飞星火"></span><span class="signal-cell cell-china" title="腾讯元宝"></span><span class="signal-cell cell-china" title="商量 SenseChat"></span><span class="signal-cell cell-china" title="天工 AI"></span><span class="signal-cell cell-china" title="秘塔 AI 搜索"></span><span class="signal-cell cell-china" title="360 AI 搜索"></span><span class="signal-cell cell-china" title="纳米 AI 搜索"></span><span class="signal-cell cell-china" title="扣子 Coze"></span><span class="signal-cell cell-china" title="Dify"></span>
+          </div>
+          <div class="signal-stats">
+            <div><strong id="international-count">33</strong><span>国际站点</span></div>
+            <div><strong id="china-count">31</strong><span>国内站点</span></div>
+            <div><strong id="category-count">13</strong><span>分类</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="region-strip" aria-label="地区快捷入口">
+      <a id="international" href="#catalog" data-region-link="international"><span>国际 AI</span><strong data-region-count="international">33</strong><small>OpenAI, Claude, Gemini, Midjourney, Runway...</small></a>
+      <a id="china" href="#catalog" data-region-link="china"><span>国内 AI</span><strong data-region-count="china">31</strong><small>DeepSeek, Kimi, 豆包, 通义千问, 可灵...</small></a>
+    </section>
+    <section id="submit" class="intake">
+      <div class="intake-copy">
+        <p class="eyebrow">live intake</p>
+        <h2>实时收录 AI 网站</h2>
+        <p>发现新的 AI 工具时直接填入网址，它会立刻加入目录并参与搜索筛选。当前版本先保存在你的浏览器本地，适合快速维护个人 AI 导航。</p>
+        <div id="submission-message" class="intake-status" role="status" aria-live="polite">新增站点会立即出现在目录顶部，并保存在当前浏览器。</div>
+      </div>
+      <form id="intake-form" class="intake-form">
+        <label><span>网站名称</span><input id="site-name" placeholder="例如：新的 AI 工具" /></label>
+        <label><span>网址</span><input id="site-url" inputmode="url" placeholder="https://example.com" /></label>
+        <div class="form-row">
+          <label><span>地区</span><select id="site-region"><option value="international">国际</option><option value="china">国内</option></select></label>
+          <label><span>分类</span><select id="site-category"><option value="通用助手">通用助手</option><option value="AI 搜索">AI 搜索</option><option value="模型聚合">模型聚合</option><option value="模型平台">模型平台</option><option value="开发平台">开发平台</option><option value="编程">编程</option><option value="应用生成">应用生成</option><option value="图像">图像</option><option value="视频">视频</option><option value="音频音乐">音频音乐</option><option value="办公效率">办公效率</option><option value="自动化">自动化</option><option value="智能体">智能体</option></select></label>
+        </div>
+        <label><span>标签</span><input id="site-tags" placeholder="用逗号或空格分隔，例如：视频 生成 创意" /></label>
+        <label><span>一句话说明</span><textarea id="site-description" placeholder="这个网站主要解决什么问题？" rows="3"></textarea></label>
+        <button type="submit">立即收录</button>
+      </form>
+    </section>
+    <section id="catalog" class="catalog">
+      <div class="section-heading">
+        <div><p class="eyebrow">catalog</p><h2>AI 网站目录</h2></div>
+        <p>当前显示 <strong id="result-count">64</strong> 个结果</p>
+      </div>
+      <div class="controls" aria-label="筛选工具">
+        <label class="search-box"><span>搜索</span><input id="search" placeholder="输入 ChatGPT、视频、办公、DeepSeek..." type="search" /></label>
+        <div class="segmented" role="group" aria-label="地区筛选">
+          <button class="active" data-region="all" type="button">全部</button>
+          <button data-region="international" type="button">国际</button>
+          <button data-region="china" type="button">国内</button>
+        </div>
+      </div>
+      <div class="category-row" aria-label="分类筛选">
+        <button class="active" data-category="全部" type="button">全部</button><button class="" data-category="通用助手" type="button">通用助手</button><button class="" data-category="AI 搜索" type="button">AI 搜索</button><button class="" data-category="模型聚合" type="button">模型聚合</button><button class="" data-category="模型平台" type="button">模型平台</button><button class="" data-category="开发平台" type="button">开发平台</button><button class="" data-category="编程" type="button">编程</button><button class="" data-category="应用生成" type="button">应用生成</button><button class="" data-category="图像" type="button">图像</button><button class="" data-category="视频" type="button">视频</button><button class="" data-category="音频音乐" type="button">音频音乐</button><button class="" data-category="办公效率" type="button">办公效率</button><button class="" data-category="自动化" type="button">自动化</button><button class="" data-category="智能体" type="button">智能体</button>
+      </div>
+      <div id="site-grid" class="site-grid"></div>
+      <div id="empty-state" class="empty-state" hidden>没有匹配结果。试试换一个关键词，或切回全部地区和全部分类。</div>
+    </section>
+    <section id="principles" class="notes">
+      <div><p class="eyebrow">principles</p><h2>收录原则</h2></div>
+      <div class="note-grid">
+        <p>优先收录官方入口、稳定可访问产品、主流模型平台和高频创作工具。</p>
+        <p>AI 产品变化很快，页面文案采用“精选持续更新”口径，方便后续继续扩充。</p>
+        <p>分类按主要用途归档，同一产品若有多个能力，会放在最常用入口下。</p>
+      </div>
+    </section>
+  </main>
+  <script>
+    const curatedSites = [{"name":"ChatGPT","url":"https://chatgpt.com","region":"international","category":"通用助手","tags":["写作","问答","办公"],"description":"OpenAI 的通用 AI 助手，适合写作、分析、编程和多模态任务。"},{"name":"Claude","url":"https://claude.ai","region":"international","category":"通用助手","tags":["长文","研究","写作"],"description":"Anthropic 的 AI 助手，擅长长上下文阅读、推理和文字工作。"},{"name":"Gemini","url":"https://gemini.google.com","region":"international","category":"通用助手","tags":["Google","多模态","办公"],"description":"Google 的 AI 助手，连接搜索、文档生态和多模态能力。"},{"name":"Microsoft Copilot","url":"https://copilot.microsoft.com","region":"international","category":"通用助手","tags":["Microsoft","办公","搜索"],"description":"微软面向网页、Windows 和 Microsoft 365 的 AI 助手。"},{"name":"Perplexity","url":"https://www.perplexity.ai","region":"international","category":"AI 搜索","tags":["搜索","引用","研究"],"description":"面向资料检索和带来源回答的 AI 搜索引擎。"},{"name":"Grok","url":"https://grok.com","region":"international","category":"通用助手","tags":["实时","X","问答"],"description":"xAI 的对话助手，主打实时信息、推理和创意任务。"},{"name":"Poe","url":"https://poe.com","region":"international","category":"模型聚合","tags":["多模型","机器人","创作"],"description":"Quora 的多模型平台，可集中使用和创建不同 AI 机器人。"},{"name":"You.com","url":"https://you.com","region":"international","category":"AI 搜索","tags":["搜索","写作","研究"],"description":"结合搜索、聊天和研究工作流的 AI 信息助手。"},{"name":"Hugging Face","url":"https://huggingface.co","region":"international","category":"模型平台","tags":["开源","模型","数据集"],"description":"全球开源模型、数据集、空间应用和开发者社区。"},{"name":"OpenAI Platform","url":"https://platform.openai.com","region":"international","category":"开发平台","tags":["API","模型","开发"],"description":"OpenAI API、模型、文档和开发者控制台。"},{"name":"Anthropic Console","url":"https://console.anthropic.com","region":"international","category":"开发平台","tags":["API","Claude","开发"],"description":"Claude API 的开发者控制台和模型调用入口。"},{"name":"Google AI Studio","url":"https://aistudio.google.com","region":"international","category":"开发平台","tags":["Gemini","API","原型"],"description":"用于测试 Gemini 模型、构建提示词和生成 API 代码的工具。"},{"name":"Cursor","url":"https://www.cursor.com","region":"international","category":"编程","tags":["IDE","代码","代理"],"description":"面向 AI 编程的编辑器，支持代码库问答、生成和重构。"},{"name":"GitHub Copilot","url":"https://github.com/features/copilot","region":"international","category":"编程","tags":["GitHub","代码","IDE"],"description":"GitHub 的 AI 编程助手，集成编辑器、PR 和代码工作流。"},{"name":"Replit","url":"https://replit.com","region":"international","category":"编程","tags":["在线开发","Agent","部署"],"description":"在线编码、AI 生成应用和快速部署的平台。"},{"name":"Lovable","url":"https://lovable.dev","region":"international","category":"应用生成","tags":["网站","应用","原型"],"description":"通过自然语言生成和迭代全栈应用的 AI 产品构建工具。"},{"name":"v0","url":"https://v0.dev","region":"international","category":"应用生成","tags":["界面","React","原型"],"description":"Vercel 的 AI 界面生成工具，适合快速做 React 页面和组件。"},{"name":"Bolt","url":"https://bolt.new","region":"international","category":"应用生成","tags":["全栈","浏览器","原型"],"description":"StackBlitz 的浏览器内 AI 应用生成和开发环境。"},{"name":"Midjourney","url":"https://www.midjourney.com","region":"international","category":"图像","tags":["绘图","设计","创意"],"description":"高质量 AI 图像生成工具，常用于视觉创意和设计探索。"},{"name":"Adobe Firefly","url":"https://firefly.adobe.com","region":"international","category":"图像","tags":["设计","Adobe","商用"],"description":"Adobe 的生成式创意工具，覆盖图像、文字效果和设计素材。"},{"name":"Leonardo AI","url":"https://leonardo.ai","region":"international","category":"图像","tags":["游戏资产","设计","图像"],"description":"面向图像、资产和创意工作流的生成式 AI 平台。"},{"name":"Ideogram","url":"https://ideogram.ai","region":"international","category":"图像","tags":["海报","文字","设计"],"description":"擅长带文字图像、海报和品牌视觉生成的 AI 工具。"},{"name":"Runway","url":"https://runwayml.com","region":"international","category":"视频","tags":["视频","剪辑","生成"],"description":"AI 视频生成、编辑和创意制作平台。"},{"name":"Pika","url":"https://pika.art","region":"international","category":"视频","tags":["视频","动画","创意"],"description":"通过文字和图像生成短视频的创意工具。"},{"name":"Luma AI","url":"https://lumalabs.ai","region":"international","category":"视频","tags":["视频","3D","Dream Machine"],"description":"提供视频生成、3D 捕捉和视觉模型能力的平台。"},{"name":"Suno","url":"https://suno.com","region":"international","category":"音频音乐","tags":["音乐","歌曲","创作"],"description":"用提示词生成歌曲、旋律和歌词的 AI 音乐平台。"},{"name":"Udio","url":"https://www.udio.com","region":"international","category":"音频音乐","tags":["音乐","歌曲","创作"],"description":"面向歌曲生成和音乐创意探索的 AI 平台。"},{"name":"ElevenLabs","url":"https://elevenlabs.io","region":"international","category":"音频音乐","tags":["语音","配音","TTS"],"description":"高质量 AI 语音、配音、声音克隆和音频工具。"},{"name":"Descript","url":"https://www.descript.com","region":"international","category":"音频音乐","tags":["剪辑","播客","视频"],"description":"用文本编辑音视频的创作工具，集成转写和 AI 编辑。"},{"name":"Notion AI","url":"https://www.notion.com/product/ai","region":"international","category":"办公效率","tags":["笔记","知识库","协作"],"description":"Notion 内置的写作、总结和知识库问答助手。"},{"name":"Canva AI","url":"https://www.canva.com/ai","region":"international","category":"办公效率","tags":["设计","演示","营销"],"description":"Canva 的 AI 设计、文案、演示和素材生成工具集合。"},{"name":"Gamma","url":"https://gamma.app","region":"international","category":"办公效率","tags":["PPT","文档","演示"],"description":"使用 AI 快速生成演示文稿、网页式文档和提案。"},{"name":"Zapier AI","url":"https://zapier.com/ai","region":"international","category":"自动化","tags":["工作流","自动化","集成"],"description":"把 AI 接入自动化流程、表单、聊天机器人和业务应用。"},{"name":"DeepSeek","url":"https://chat.deepseek.com","region":"china","category":"通用助手","tags":["推理","开源","代码"],"description":"深度求索的 AI 助手，覆盖通用问答、推理、写作和编程。"},{"name":"Kimi","url":"https://kimi.moonshot.cn","region":"china","category":"通用助手","tags":["长文","阅读","办公"],"description":"月之暗面的 AI 助手，擅长长文阅读、资料整理和写作。"},{"name":"豆包","url":"https://www.doubao.com","region":"china","category":"通用助手","tags":["字节","多模态","办公"],"description":"字节跳动推出的 AI 助手，覆盖聊天、写作、图像和学习场景。"},{"name":"通义千问","url":"https://tongyi.aliyun.com/qianwen","region":"china","category":"通用助手","tags":["阿里","办公","模型"],"description":"阿里云通义系列 AI 助手和模型服务入口。"},{"name":"文心一言","url":"https://yiyan.baidu.com","region":"china","category":"通用助手","tags":["百度","搜索","创作"],"description":"百度文心大模型的 AI 对话和创作工具。"},{"name":"智谱清言","url":"https://chatglm.cn","region":"china","category":"通用助手","tags":["智谱","GLM","办公"],"description":"智谱 AI 的通用助手，支持问答、写作、代码和文件处理。"},{"name":"讯飞星火","url":"https://xinghuo.xfyun.cn","region":"china","category":"通用助手","tags":["科大讯飞","语音","教育"],"description":"科大讯飞的大模型助手，覆盖办公、学习、语音和行业场景。"},{"name":"腾讯元宝","url":"https://yuanbao.tencent.com","region":"china","category":"通用助手","tags":["腾讯","微信","阅读"],"description":"腾讯混元能力支持的 AI 助手，适合搜索、阅读和写作。"},{"name":"商量 SenseChat","url":"https://chat.sensetime.com","region":"china","category":"通用助手","tags":["商汤","办公","多模态"],"description":"商汤日日新体系下的对话助手和多模态能力入口。"},{"name":"天工 AI","url":"https://www.tiangong.cn","region":"china","category":"AI 搜索","tags":["搜索","写作","研究"],"description":"昆仑万维旗下 AI 助手，提供搜索、问答、写作和多媒体能力。"},{"name":"秘塔 AI 搜索","url":"https://metaso.cn","region":"china","category":"AI 搜索","tags":["搜索","引用","研究"],"description":"面向中文资料检索、问答和研究报告生成的 AI 搜索工具。"},{"name":"360 AI 搜索","url":"https://www.sou.com","region":"china","category":"AI 搜索","tags":["搜索","问答","网页"],"description":"360 的 AI 搜索入口，支持联网问答和信息聚合。"},{"name":"纳米 AI 搜索","url":"https://www.n.cn","region":"china","category":"AI 搜索","tags":["搜索","智能体","问答"],"description":"面向中文用户的 AI 搜索和智能体入口。"},{"name":"扣子 Coze","url":"https://www.coze.cn","region":"china","category":"智能体","tags":["机器人","工作流","插件"],"description":"字节跳动的智能体开发平台，可搭建聊天机器人和工作流。"},{"name":"Dify","url":"https://dify.ai","region":"china","category":"智能体","tags":["开源","应用","工作流"],"description":"开源 LLM 应用开发平台，适合搭建 RAG、智能体和业务工具。"},{"name":"阿里云百炼","url":"https://bailian.console.aliyun.com","region":"china","category":"开发平台","tags":["阿里云","API","模型"],"description":"阿里云大模型开发平台，集成模型调用、应用构建和评测。"},{"name":"百度千帆","url":"https://qianfan.cloud.baidu.com","region":"china","category":"开发平台","tags":["百度云","API","模型"],"description":"百度智能云的大模型平台，提供模型服务、工具链和应用开发能力。"},{"name":"火山方舟","url":"https://www.volcengine.com/product/ark","region":"china","category":"开发平台","tags":["火山引擎","API","模型"],"description":"火山引擎的大模型服务平台，提供模型调用、训练和应用构建。"},{"name":"硅基流动","url":"https://siliconflow.cn","region":"china","category":"开发平台","tags":["API","开源模型","推理"],"description":"提供开源模型推理、API 和模型应用基础设施的平台。"},{"name":"即梦 AI","url":"https://jimeng.jianying.com","region":"china","category":"图像","tags":["图像","视频","创意"],"description":"剪映旗下的 AI 图像和视频创作工具。"},{"name":"通义万相","url":"https://tongyi.aliyun.com/wanxiang","region":"china","category":"图像","tags":["阿里","图像","设计"],"description":"阿里通义的 AI 图像生成和视觉创作工具。"},{"name":"文心一格","url":"https://yige.baidu.com","region":"china","category":"图像","tags":["百度","绘图","创意"],"description":"百度推出的 AI 艺术和图像创作平台。"},{"name":"美图设计室","url":"https://www.designkit.com","region":"china","category":"图像","tags":["设计","电商","海报"],"description":"美图旗下的 AI 设计工具，面向海报、电商图和营销素材。"},{"name":"可灵 AI","url":"https://klingai.kuaishou.com","region":"china","category":"视频","tags":["快手","视频","图生视频"],"description":"快手的 AI 视频生成工具，支持文生视频和图生视频。"},{"name":"海螺 AI","url":"https://hailuoai.com","region":"china","category":"视频","tags":["MiniMax","视频","多模态"],"description":"MiniMax 旗下 AI 产品入口，覆盖对话、视频和创作能力。"},{"name":"Vidu","url":"https://www.vidu.cn","region":"china","category":"视频","tags":["视频","动画","创意"],"description":"面向中文创作者的 AI 视频生成平台。"},{"name":"剪映 AI","url":"https://www.capcut.cn","region":"china","category":"视频","tags":["剪辑","字幕","创作"],"description":"剪映国内版，集成智能剪辑、字幕、脚本和生成式创作功能。"},{"name":"讯飞听见","url":"https://www.iflyrec.com","region":"china","category":"音频音乐","tags":["转写","会议","语音"],"description":"科大讯飞的录音转写、会议纪要和语音处理工具。"},{"name":"腾讯智影","url":"https://zenvideo.qq.com","region":"china","category":"视频","tags":["数字人","视频","剪辑"],"description":"腾讯的视频创作平台，覆盖数字人、剪辑和内容生产。"},{"name":"飞书妙记","url":"https://www.feishu.cn/product/minutes","region":"china","category":"办公效率","tags":["会议","转写","协作"],"description":"飞书的会议记录、转写、总结和协作工具。"},{"name":"WPS AI","url":"https://ai.wps.cn","region":"china","category":"办公效率","tags":["文档","表格","PPT"],"description":"金山办公的 AI 办公套件，覆盖文档、表格、演示和阅读。"}];
+    const storageKey = "ai-directory-submitted-sites";
+    const labels = { international: "国际", china: "国内" };
+    let submittedSites = [];
+    let state = { region: "all", category: "全部", query: "" };
+    const grid = document.querySelector("#site-grid");
+    const count = document.querySelector("#result-count");
+    const empty = document.querySelector("#empty-state");
+    const message = document.querySelector("#submission-message");
+    const regionButtons = [...document.querySelectorAll("[data-region]")];
+    const categoryButtons = [...document.querySelectorAll("[data-category]")];
+
+    try {
+      submittedSites = JSON.parse(localStorage.getItem(storageKey) || "[]");
+    } catch {
+      message.textContent = "本地存储暂不可用，仍可在当前页面临时收录。";
+    }
+
+    function escapeHtml(value) {
+      return String(value).replace(/[&<>"']/g, (char) => ({
+        "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+      }[char]));
+    }
+
+    function normalizeUrl(value) {
+      const trimmed = value.trim();
+      return /^https?:\/\//i.test(trimmed) ? trimmed : "https://" + trimmed;
+    }
+
+    function isValidUrl(value) {
+      try {
+        const parsed = new URL(value);
+        return Boolean(parsed.hostname) && ["http:", "https:"].includes(parsed.protocol);
+      } catch {
+        return false;
+      }
+    }
+
+    function allSites() {
+      return [...submittedSites, ...curatedSites];
+    }
+
+    function renderStats() {
+      const sites = allSites();
+      const international = sites.filter((site) => site.region === "international").length;
+      const china = sites.filter((site) => site.region === "china").length;
+      document.querySelector("#total-sites").textContent = sites.length;
+      document.querySelector("#international-count").textContent = international;
+      document.querySelector("#china-count").textContent = china;
+      document.querySelector('[data-region-count="international"]').textContent = international;
+      document.querySelector('[data-region-count="china"]').textContent = china;
+      document.querySelector("#category-count").textContent = new Set(sites.map((site) => site.category)).size;
+      document.querySelector("#signal-cells").innerHTML = sites.slice(0, 48).map((site) => (
+        '<span class="signal-cell ' + (site.region === "china" ? "cell-china" : "cell-international") + '" title="' + escapeHtml(site.name) + '"></span>'
+      )).join("");
+    }
+
+    function render() {
+      const q = state.query.trim().toLowerCase();
+      const filtered = allSites().filter((site) => {
+        const regionMatch = state.region === "all" || site.region === state.region;
+        const categoryMatch = state.category === "全部" || site.category === state.category;
+        const text = [site.name, site.category, site.description, ...site.tags].join(" ").toLowerCase();
+        return regionMatch && categoryMatch && (!q || text.includes(q));
+      });
+
+      renderStats();
+      count.textContent = filtered.length;
+      empty.hidden = filtered.length > 0;
+      grid.innerHTML = filtered.map((site) => `
+        <article class="site-card">
+          <div class="card-topline">
+            <div class="badge-group"><span class="region-badge ${site.region}">${labels[site.region]}</span>${site.source === "local" ? '<span class="local-badge">新收录</span>' : ""}</div>
+            <span>${escapeHtml(site.category)}</span>
+          </div>
+          <div class="card-title-row"><div class="site-initials">${escapeHtml(site.name.slice(0, 2))}</div><h3>${escapeHtml(site.name)}</h3></div>
+          <p>${escapeHtml(site.description)}</p>
+          <div class="tag-row">${site.tags.map((tag) => `<span>${escapeHtml(tag)}</span>`).join("")}</div>
+          <a href="${escapeHtml(site.url)}" target="_blank" rel="noreferrer" aria-label="打开 ${escapeHtml(site.name)}">打开网址</a>
+        </article>`).join("");
+    }
+
+    document.querySelector("#intake-form").addEventListener("submit", (event) => {
+      event.preventDefault();
+      const name = document.querySelector("#site-name").value.trim();
+      const url = normalizeUrl(document.querySelector("#site-url").value);
+      const region = document.querySelector("#site-region").value;
+      const category = document.querySelector("#site-category").value;
+      const tags = document.querySelector("#site-tags").value.split(/[,，、\s]+/).map((tag) => tag.trim()).filter(Boolean).slice(0, 5);
+      const description = document.querySelector("#site-description").value.trim();
+
+      if (!name || !url) {
+        message.textContent = "请至少填写网站名称和网址。";
+        return;
+      }
+
+      if (!isValidUrl(url)) {
+        message.textContent = "网址格式看起来不对，请检查后再收录。";
+        return;
+      }
+
+      const duplicate = allSites().some((site) => site.url.replace(/\/$/, "") === url.replace(/\/$/, ""));
+      if (duplicate) {
+        message.textContent = "这个网址已经在目录里了，可以直接用搜索找到它。";
+        return;
+      }
+
+      const nextSite = {
+        name,
+        url,
+        region,
+        category,
+        tags: tags.length > 0 ? tags : ["新收录"],
+        description: description || "用户实时收录的 AI 网站，待进一步补充用途说明。",
+        source: "local",
+        addedAt: new Date().toISOString(),
+      };
+
+      submittedSites = [nextSite, ...submittedSites];
+      event.currentTarget.reset();
+      state = { region: "all", category: "全部", query: "" };
+      document.querySelector("#search").value = "";
+      regionButtons.forEach((item) => item.classList.toggle("active", item.dataset.region === "all"));
+      categoryButtons.forEach((item) => item.classList.toggle("active", item.dataset.category === "全部"));
+      message.textContent = "已实时收录 " + name + "，现在可以在目录顶部看到它。";
+
+      try {
+        localStorage.setItem(storageKey, JSON.stringify(submittedSites));
+      } catch {
+        message.textContent = "已在当前页面临时收录 " + name + "，但浏览器没有允许保存。";
+      }
+
+      render();
+    });
+
+    document.querySelector("#search").addEventListener("input", (event) => {
+      state.query = event.target.value;
+      render();
+    });
+
+    regionButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        state.region = button.dataset.region;
+        regionButtons.forEach((item) => item.classList.toggle("active", item === button));
+        render();
+      });
+    });
+
+    document.querySelectorAll("[data-region-link]").forEach((link) => {
+      link.addEventListener("click", () => {
+        const target = link.dataset.regionLink;
+        const button = regionButtons.find((item) => item.dataset.region === target);
+        if (button) button.click();
+      });
+    });
+
+    categoryButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        state.category = button.dataset.category;
+        categoryButtons.forEach((item) => item.classList.toggle("active", item === button));
+        render();
+      });
+    });
+
+    render();
+  </script>
+</body>
+</html>
